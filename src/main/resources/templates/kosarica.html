@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}" lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>MovieApp</title>
+</head>
+<body layout:fragment="content">
+
+
+<div    th:if="${error}"
+        class="toast fade show position-absolute top-0 end-0 z-1 mt-5 me-3"
+        style="margin-top: 70px !important"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        data-bs-autohide="false"
+>
+    <div class="toast-body" style="background-color: red; color: #fff">
+        <strong th:text="${error}"></strong>
+    </div>
+</div>
+<div class="container mt-5">
+    <h3 class="text-center mt-5 ">Vasa kosarica</h3>
+    <hr class="text-light mt-5">
+
+
+    <table class="table table-bordered mt-3 shadow-lg">
+        <thead>
+        <tr>
+            <th scope="col">Model</th>
+            <th scope="col">Kategorija</th>
+            <th scope="col">Specifikacije</th>
+            <th scope="col">Cijena</th>
+            <th scope="col">Ukloni</th>
+        </tr>
+        </thead>
+     <tbody>
+        <tr th:each="kosarica: ${kosarice}">
+            <th scope="row" th:text="${kosarica.getMobile().getName()}"></th>
+            <td th:text="${kosarica.getMobile().getCategory().getName()}"  ></td>
+            <td th:text="${kosarica.getMobile().getOpis()}"></td>
+            <td th:text="${kosarica.getMobile().getCijena()} + ' €'"></td>
+            <td><a data-toggle="tooltip" data-placement="top" title="Izbrisi" class="btn btn-sm btn-outline-danger mt-1 w-100" th:href="@{/kosarica/delete/{id}(id=${kosarica.getId()})}">Ukloni</a></td>
+        </tr>
+
+    </tbody>
+</table>
+</div>
+</body>
+</html>
+
+<style>
+
+
+
+  @media only screen and (max-width: 576px) {
+  .Kartica {
+    margin:auto !important;
+    margin-top:20px !important;
+  }
+   .navbar-toggler-icon {
+            color: white !important;
+   }
+
+  .numberWatch{
+    display:none;
+  }
+
+}
+
+</style>
